@@ -1,0 +1,11 @@
+<component name="libraryTable">
+  <library name="Gradle: com.ibm.mq:com.ibm.mq.allclient:9.1.0.0">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.ibm.mq/com.ibm.mq.allclient/9.1.0.0/97b9658e06b4ff933cd9fddfcd3115ac8fc2835a/com.ibm.mq.allclient-9.1.0.0.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.ibm.mq/com.ibm.mq.allclient/9.1.0.0/8716a8c382d4f6c97acf7f53da6fe51c49644072/com.ibm.mq.allclient-9.1.0.0-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

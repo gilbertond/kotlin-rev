@@ -1,0 +1,11 @@
+<component name="libraryTable">
+  <library name="Gradle: org.apache.qpid:qpid-broker-plugins-access-control:6.0.4">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.apache.qpid/qpid-broker-plugins-access-control/6.0.4/8f6cbd2dc5c36897dab1615232ae05f3dc2ea788/qpid-broker-plugins-access-control-6.0.4.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.apache.qpid/qpid-broker-plugins-access-control/6.0.4/3d23c8dae3dd4a90a0666dadc44f0fbc699ecb3c/qpid-broker-plugins-access-control-6.0.4-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

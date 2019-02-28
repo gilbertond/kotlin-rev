@@ -1,0 +1,11 @@
+<component name="libraryTable">
+  <library name="Gradle: org.apache.qpid:qpid-broker-plugins-derby-store:6.0.4">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.apache.qpid/qpid-broker-plugins-derby-store/6.0.4/ed2d7067183e6e362e511c3f31af8fe5a22bbdf4/qpid-broker-plugins-derby-store-6.0.4.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.apache.qpid/qpid-broker-plugins-derby-store/6.0.4/65f31999e1b43b9a14760ea47e95e52effe9efec/qpid-broker-plugins-derby-store-6.0.4-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

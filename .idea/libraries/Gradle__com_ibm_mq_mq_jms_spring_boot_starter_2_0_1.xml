@@ -1,0 +1,11 @@
+<component name="libraryTable">
+  <library name="Gradle: com.ibm.mq:mq-jms-spring-boot-starter:2.0.1">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.ibm.mq/mq-jms-spring-boot-starter/2.0.1/e74f6d096eed7f0b0b9d3352fd47d80dae1d77d4/mq-jms-spring-boot-starter-2.0.1.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.ibm.mq/mq-jms-spring-boot-starter/2.0.1/bf8c2340188c4533c7ae9ff506c4084790058e43/mq-jms-spring-boot-starter-2.0.1-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

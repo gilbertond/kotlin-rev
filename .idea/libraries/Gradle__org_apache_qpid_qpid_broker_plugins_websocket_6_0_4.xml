@@ -1,0 +1,11 @@
+<component name="libraryTable">
+  <library name="Gradle: org.apache.qpid:qpid-broker-plugins-websocket:6.0.4">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.apache.qpid/qpid-broker-plugins-websocket/6.0.4/69f6da4ef722e7317d6e1d25bcdc19c70a9f1e6d/qpid-broker-plugins-websocket-6.0.4.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.apache.qpid/qpid-broker-plugins-websocket/6.0.4/c1b5c9e50b5d0bc87dc16bc0c6bf63509ae980/qpid-broker-plugins-websocket-6.0.4-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

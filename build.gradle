@@ -1,0 +1,44 @@
+buildscript {
+    ext.kotlin_version = '1.2.41' // Required for Kotlin integration
+    ext.spring_boot_version = '2.0.1.RELEASE'
+    repositories {
+        jcenter()
+    }
+    dependencies {
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version" // Required for Kotlin integration
+        classpath "org.jetbrains.kotlin:kotlin-allopen:$kotlin_version" // See https://kotlinlang.org/docs/reference/compiler-plugins.html#kotlin-spring-compiler-plugin
+        classpath "org.springframework.boot:spring-boot-gradle-plugin:$spring_boot_version"
+        classpath "org.jetbrains.kotlin:kotlin-maven-noarg:$kotlin_version"
+    }
+}
+
+apply plugin: 'kotlin' // Required for Kotlin integration
+apply plugin: "kotlin-spring" // See https://kotlinlang.org/docs/reference/compiler-plugins.html#kotlin-spring-compiler-plugin
+apply plugin: 'org.springframework.boot'
+apply plugin: 'application'
+
+group = 'com.gil'
+version = '0.0.1-SNAPSHOT'
+
+jar {
+    baseName = 'gil-kotlin-rest-service'
+//    version = '0.1.0'
+}
+
+repositories {
+    jcenter()
+}
+
+dependencies {
+    compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version" // Required for Kotlin integration
+    compile "org.springframework.boot:spring-boot-starter-web:$spring_boot_version"
+    compile group: "org.springframework.boot", name: "spring-boot-starter-security", version: "$spring_boot_version"
+    compile group: 'org.jetbrains.kotlin', name: 'kotlin-reflect', version: '1.2.41'
+    compile group: 'io.jsonwebtoken' , name: 'jjwt',  version: '0.7.0'
+    testCompile group: 'com.github.tomakehurst', name: 'wiremock', version: '1.58' //TODO complete this
+    testCompile('org.springframework.boot:spring-boot-starter-test:2.0.0.RELEASE')
+}
+
+bootRun {
+    mainClassName = 'Application'
+}

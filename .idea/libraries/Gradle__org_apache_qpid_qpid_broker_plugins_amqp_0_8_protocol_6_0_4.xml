@@ -1,0 +1,11 @@
+<component name="libraryTable">
+  <library name="Gradle: org.apache.qpid:qpid-broker-plugins-amqp-0-8-protocol:6.0.4">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.apache.qpid/qpid-broker-plugins-amqp-0-8-protocol/6.0.4/8f20c8cd99ed2d959a08df29168e4b963e983d9d/qpid-broker-plugins-amqp-0-8-protocol-6.0.4.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.apache.qpid/qpid-broker-plugins-amqp-0-8-protocol/6.0.4/20ecef46424d51619d6499f76df16061db7825e0/qpid-broker-plugins-amqp-0-8-protocol-6.0.4-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

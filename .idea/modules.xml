@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/kotlin-rev.iml" filepath="$PROJECT_DIR$/kotlin-rev.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/kotlin-rev_main.iml" filepath="$PROJECT_DIR$/.idea/modules/kotlin-rev_main.iml" group="kotlin-rev" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/kotlin-rev_test.iml" filepath="$PROJECT_DIR$/.idea/modules/kotlin-rev_test.iml" group="kotlin-rev" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/rabbit-test/rabbit-test.iml" filepath="$PROJECT_DIR$/.idea/modules/rabbit-test/rabbit-test.iml" group="rabbit-test" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/rabbit-test/rabbit-test_main.iml" filepath="$PROJECT_DIR$/.idea/modules/rabbit-test/rabbit-test_main.iml" group="rabbit-test" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/rabbit-test/rabbit-test_test.iml" filepath="$PROJECT_DIR$/.idea/modules/rabbit-test/rabbit-test_test.iml" group="rabbit-test" />
+    </modules>
+  </component>
+</project>
