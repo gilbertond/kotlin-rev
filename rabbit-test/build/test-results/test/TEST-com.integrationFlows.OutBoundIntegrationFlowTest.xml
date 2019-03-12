@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.integrationFlows.OutBoundIntegrationFlowTest" tests="4" skipped="4" failures="0" errors="0" timestamp="2019-03-12T06:24:28" hostname="Gilberts-MacBook-Pro.local" time="0.001">
+  <properties/>
+  <testcase name="returns true if count number of message in a queue on rabbitMQ is 3" classname="com.integrationFlows.OutBoundIntegrationFlowTest" time="0.0">
+    <skipped/>
+  </testcase>
+  <testcase name="test received messages are the same sent" classname="com.integrationFlows.OutBoundIntegrationFlowTest" time="0.0">
+    <skipped/>
+  </testcase>
+  <testcase name="return true if a message in the queue is purged or deleted returns true if messages count is 0" classname="com.integrationFlows.OutBoundIntegrationFlowTest" time="0.0">
+    <skipped/>
+  </testcase>
+  <testcase name="test sending messages" classname="com.integrationFlows.OutBoundIntegrationFlowTest" time="0.0">
+    <skipped/>
+  </testcase>
+  <system-out><![CDATA[2019-03-12 01:24:28.137  INFO 17956 --- [    Test worker] .b.t.c.SpringBootTestContextBootstrapper : Neither @ContextConfiguration nor @ContextHierarchy found for test class [com.integrationFlows.OutBoundIntegrationFlowTest], using SpringBootContextLoader
+2019-03-12 01:24:28.138  INFO 17956 --- [    Test worker] o.s.t.c.support.AbstractContextLoader    : Could not detect default resource locations for test class [com.integrationFlows.OutBoundIntegrationFlowTest]: no resource found for suffixes {-context.xml, Context.groovy}.
+2019-03-12 01:24:28.154  INFO 17956 --- [    Test worker] .b.t.c.SpringBootTestContextBootstrapper : Loaded default TestExecutionListener class names from location [META-INF/spring.factories]: [org.springframework.test.context.web.ServletTestExecutionListener, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener, org.springframework.test.context.support.DependencyInjectionTestExecutionListener, org.springframework.test.context.support.DirtiesContextTestExecutionListener, org.springframework.test.context.transaction.TransactionalTestExecutionListener, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener, org.springframework.boot.test.autoconfigure.restdocs.RestDocsTestExecutionListener, org.springframework.boot.test.autoconfigure.web.client.MockRestServiceServerResetTestExecutionListener, org.springframework.boot.test.autoconfigure.web.servlet.MockMvcPrintOnlyOnFailureTestExecutionListener, org.springframework.boot.test.autoconfigure.web.servlet.WebDriverTestExecutionListener, org.springframework.boot.test.mock.mockito.MockitoTestExecutionListener, org.springframework.boot.test.mock.mockito.ResetMocksTestExecutionListener]
+2019-03-12 01:24:28.155  INFO 17956 --- [    Test worker] .b.t.c.SpringBootTestContextBootstrapper : Using TestExecutionListeners: [org.springframework.test.context.web.ServletTestExecutionListener@6f0acd5f, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener@482d5ff6, org.springframework.boot.test.mock.mockito.MockitoTestExecutionListener@35e8029d, org.springframework.boot.test.autoconfigure.SpringBootDependencyInjectionTestExecutionListener@48b8f923, org.springframework.test.context.support.DirtiesContextTestExecutionListener@7161a55e, org.springframework.test.context.transaction.TransactionalTestExecutionListener@5391866b, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener@26188a6e, org.springframework.boot.test.autoconfigure.restdocs.RestDocsTestExecutionListener@29e60e6f, org.springframework.boot.test.autoconfigure.web.client.MockRestServiceServerResetTestExecutionListener@55511558, org.springframework.boot.test.autoconfigure.web.servlet.MockMvcPrintOnlyOnFailureTestExecutionListener@aac7347, org.springframework.boot.test.autoconfigure.web.servlet.WebDriverTestExecutionListener@6885d386, org.springframework.boot.test.mock.mockito.ResetMocksTestExecutionListener@71092d8f]
+]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>
