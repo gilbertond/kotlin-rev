@@ -23,10 +23,10 @@ import org.hamcrest.CoreMatchers.`is` as Is
 @ActiveProfiles("integration", "local")
 @RunWith(SpringJUnit4ClassRunner::class)
 @SpringBootTest (classes = [GillApplication::class])
-open class OutBoundIntegrationFlowTest{
+class OutBoundIntegrationFlowTest{
 
     @Autowired
-    val outBoundChannel: MessageChannel?= null
+    lateinit var outBoundChannel: MessageChannel
 
     @Resource
     private val admin: RabbitAdmin? = null

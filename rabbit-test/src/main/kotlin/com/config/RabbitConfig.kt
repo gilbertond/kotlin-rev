@@ -10,6 +10,9 @@ import org.springframework.amqp.rabbit.core.support.BatchingStrategy
 import org.springframework.amqp.rabbit.core.support.SimpleBatchingStrategy
 import org.springframework.amqp.support.converter.DefaultClassMapper
 import org.springframework.amqp.support.converter.Jackson2JsonMessageConverter
+//import org.springframework.amqp.support.converter.Jackson2JsonMessageConverter
+//import org.springframework.amqp.support.converter.Jackson2JsonMessageConverter
+//import org.springframework.amqp.support.converter.Jackson2JsonMessageConverter
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
@@ -28,7 +31,7 @@ open class RabbitConfig{
     private val rabbitConnectionFactory: ConnectionFactory? = null
 
     @Autowired
-    private val jsonMessageConverter: Jackson2JsonMessageConverter ?= null
+    private val jsonMessageConverter: Jackson2JsonMessageConverter?= null
 
     @Autowired
     private val batchingStrategy: BatchingStrategy ?= null

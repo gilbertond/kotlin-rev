@@ -8,7 +8,6 @@ import com.ibm.msg.client.wmq.WMQConstants
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
-import org.springframework.http.converter.json.Jackson2ObjectMapperBuilder
 import org.springframework.integration.channel.DirectChannel
 import org.springframework.integration.dsl.IntegrationFlow
 import org.springframework.integration.dsl.IntegrationFlows
@@ -22,6 +21,7 @@ import org.springframework.jms.annotation.JmsListener
 import org.springframework.jms.connection.UserCredentialsConnectionFactoryAdapter
 import org.springframework.jms.core.JmsTemplate
 import org.springframework.jms.support.converter.MessageConverter
+import org.springframework.messaging.MessageChannel
 import java.util.concurrent.TimeUnit
 import java.util.logging.Logger
 import javax.jms.ConnectionFactory
@@ -30,7 +30,7 @@ import javax.jms.JMSException
 import javax.jms.Queue
 
 @Configuration
-open class MQConfig {
+class MQConfig {
 
     private val logger: Logger = Logger.getLogger(MQConfig::class.simpleName)
 
@@ -47,21 +47,21 @@ open class MQConfig {
     private val messageConverter: CustomMessageConverter ?= null
 
     @Bean
-    open fun mqOutBoundFlow(): IntegrationFlow {
+    fun mqOutBoundFlow(): IntegrationFlow {
         logger.info("*********************\n Creating MQ outBoundChannel to send messages\n *****************")
         return IntegrationFlows.from(mqConfig.mqOutBoundChannel())     // or "outBoundChannel" call by name)
                 .handle(
-                        Jms.outboundAdapter(jmsTemplate).destination("gil.queue")//destination ca be bean of type Destination: This is a queue
+                        Jms.outboundAdapter(jmsTemplate).destination("DEV.QUEUE.3")//destination ca be bean of type Destination: This is a queue
                 ).get()
     }
 
     @Bean
-    open fun mqInBoundFlow(): IntegrationFlow {
+    fun mqInBoundFlow(): IntegrationFlow {
         logger.info("*********************\n Creating MQ InBoundChannel to Read messages\n *****************")
         return IntegrationFlows.from(
                 Jms.inboundAdapter(connectionFactory())
                         .configureJmsTemplate { t -> t.receiveTimeout(1000) }
-                        .destination("some.queue")
+                        .destination("DEV.QUEUE.1")
         ) { e ->
             e.poller(
                     Pollers.fixedDelay(5000).maxMessagesPerPoll(2)
@@ -72,12 +72,12 @@ open class MQConfig {
 
     //Router: Read and send messages to other channel
     @Bean
-    open fun mqInAndOutBoundFlow(): IntegrationFlow {
+    fun mqInAndOutBoundFlow(): IntegrationFlow {
         logger.info("*********************\n Creating In/Out Bound Channel to Read messages\n *****************")
         return IntegrationFlows.from(
                 Jms.inboundAdapter(connectionFactory())
                         .configureJmsTemplate { t -> t.receiveTimeout(1000) }
-                        .destination("some.queue")
+                        .destination("DEV.QUEUE.1")
         ) { e ->
             e.poller(
                     Pollers.fixedDelay(5000).maxMessagesPerPoll(2)
@@ -88,18 +88,18 @@ open class MQConfig {
     }
 
     @Bean
-    open fun destinationQueue(): Destination {
-        return MQQueue("gil.queue")
+    fun destinationQueue(): Destination {
+        return MQQueue("DEV.QUEUE.3")
     }
 
     @Bean
-    open fun mqOutBoundChannel(): DirectChannel {
+    fun mqOutBoundChannel(): MessageChannel {
         return MessageChannels.direct().get()
     }
 
     @Bean
     @Throws(NumberFormatException::class, JMSException::class)
-    open fun jmsTemplate(): JmsTemplate {
+    fun jmsTemplate(): JmsTemplate {
         val template = JmsTemplate()
         template.messageConverter = messageConverter
         template.connectionFactory = connectionFactory()
@@ -109,7 +109,7 @@ open class MQConfig {
 
     @Bean
     @Throws(NumberFormatException::class, JMSException::class)
-    open fun connectionFactory(): ConnectionFactory {
+    fun connectionFactory(): ConnectionFactory {
         val mqQueueConnectionFactory = MQQueueConnectionFactory()
         mqQueueConnectionFactory.hostName = connectionProperties.hostName
 //        mqQueueConnectionFactory.port = connectionProperties.port
@@ -127,19 +127,19 @@ open class MQConfig {
 
     @Bean
     @Throws(JMSException::class)
-    open fun targetQueue(): Queue {
-        return MQQueue("some.queue")
+    fun targetQueue(): Queue {
+        return MQQueue("DEV.QUEUE.1")
     }
 
 //    @Bean
-//    open fun objectMapperBuilder(): Jackson2ObjectMapperBuilder {
+//    fun objectMapperBuilder(): Jackson2ObjectMapperBuilder {
 //        var builder: Jackson2ObjectMapperBuilder = Jackson2ObjectMapperBuilder()
 //        builder.serializationInclusion(JsonInclude.Include.NON_NULL)
 //        return builder
 //    }
 
 //    @JmsListener(destination = "mqDestn")
-//    open fun listen(data: String) {
+//    fun listen(data: String) {
 //        logger.info(data)
 //    }
 }

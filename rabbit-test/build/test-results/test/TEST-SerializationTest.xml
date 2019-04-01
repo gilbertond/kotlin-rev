@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="SerializationTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2019-03-12T06:24:28" hostname="Gilberts-MacBook-Pro.local" time="0.101">
+<testsuite name="SerializationTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2019-04-01T00:14:13" hostname="Gilberts-MBP" time="0.227">
   <properties/>
-  <testcase name="givenAbstractClass_whenDeserializing_thenException" classname="SerializationTest" time="0.101"/>
+  <testcase name="givenAbstractClass_whenDeserializing_thenException" classname="SerializationTest" time="0.227"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>

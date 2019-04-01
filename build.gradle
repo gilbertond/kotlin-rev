@@ -12,33 +12,64 @@ buildscript {
     }
 }
 
-apply plugin: 'kotlin' // Required for Kotlin integration
-apply plugin: "kotlin-spring" // See https://kotlinlang.org/docs/reference/compiler-plugins.html#kotlin-spring-compiler-plugin
-apply plugin: 'org.springframework.boot'
-apply plugin: 'application'
+allprojects {        //Applies dependencies and configs to submodules
 
-group = 'com.gil'
-version = '0.0.1-SNAPSHOT'
+    apply plugin: 'kotlin' // Required for Kotlin integration
+    apply plugin: "kotlin-spring"
+    // See https://kotlinlang.org/docs/reference/compiler-plugins.html#kotlin-spring-compiler-plugin
+    apply plugin: 'org.springframework.boot'
+    apply plugin: 'application'
 
-jar {
-    baseName = 'gil-kotlin-rest-service'
+    group = 'com.gil'
+    version = '0.0.1-SNAPSHOT'
+
+    jar {
+        baseName = 'gil-kotlin-rest-service'
 //    version = '0.1.0'
-}
+    }
 
-repositories {
-    jcenter()
+    repositories {
+        jcenter()
+    }
+
+    dependencies {
+        compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version" // Required for Kotlin integration
+//        compile("org.springframework.boot:spring-boot-starter-web:$spring_boot_version") {
+//        exclude module: "spring-boot-starter-tomcat"
+//        }
+
+        
+        compile group: 'org.jetbrains.kotlin', name: 'kotlin-reflect', version: '1.2.41'
+        
+//        testCompile group: 'com.github.tomakehurst', name: 'wiremock', version: '1.58' //TODO complete this
+//    testCompile('org.springframework.boot:spring-boot-starter-test:2.0.0.RELEASE')
+        testCompile("org.springframework.boot:spring-boot-starter-test:$spring_boot_version")
+
+        compile ('com.fasterxml.jackson.core:jackson-databind:2.7.4'){
+            exclude module: "jackson-core"
+            exclude module: "jackson-annotations"
+        }
+        compile("org.springframework.boot:spring-boot-starter-web:$spring_boot_version") {
+            exclude module: "spring-boot-starter-json"
+        }
+        compile ('com.fasterxml.jackson.core:jackson-core:2.7.4')
+        compile ('com.fasterxml.jackson.core:jackson-annotations:2.7.4')
+    }
 }
 
 dependencies {
     compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version" // Required for Kotlin integration
-    compile "org.springframework.boot:spring-boot-starter-web:$spring_boot_version"
-    compile group: "org.springframework.boot", name: "spring-boot-starter-security", version: "$spring_boot_version"
-    compile group: 'org.jetbrains.kotlin', name: 'kotlin-reflect', version: '1.2.41'
-    compile group: 'io.jsonwebtoken' , name: 'jjwt',  version: '0.7.0'
-    testCompile group: 'com.github.tomakehurst', name: 'wiremock', version: '1.58' //TODO complete this
-    testCompile('org.springframework.boot:spring-boot-starter-test:2.0.0.RELEASE')
-}
+    compile("org.springframework.boot:spring-boot-starter-web:$spring_boot_version") {
+        exclude module: "spring-boot-starter-json"
+    }
 
+    compile ('io.jsonwebtoken:jjwt:0.7.0') {
+        exclude module: "jackson-databind"
+    }
+    compile group: 'org.springframework.boot', name: 'spring-boot-starter-jetty', version: '2.1.3.RELEASE'
+
+    compile group: "org.springframework.boot", name: "spring-boot-starter-security", version: "$spring_boot_version"
+}
 bootRun {
     mainClassName = 'Application'
 }

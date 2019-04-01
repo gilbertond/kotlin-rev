@@ -9,16 +9,14 @@ import javax.jms.Message
 import javax.jms.Session
 import javax.jms.TextMessage
 import org.slf4j.LoggerFactory
-import com.ibm.disthub2.impl.formats.OldEnvelop.payload.error
-import com.ibm.disthub2.impl.formats.OldEnvelop.payload
-
-
+import org.springframework.context.annotation.Configuration
 
 @Component
+@Configuration
 class CustomMessageConverter: MessageConverter {
-    
+
     private val mapper = ObjectMapper()
-    
+
     override fun toMessage(`object`: Any, session: Session): Message {
 
         //Object is the payload to be converted to json before sending to destination

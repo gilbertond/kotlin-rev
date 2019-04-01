@@ -26,14 +26,10 @@ repositories {
 
 dependencies {
     compile "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
-    compile "org.springframework.boot:spring-boot-starter-integration:$spring_boot_version"
-    testCompile ("org.springframework.boot:spring-boot-starter-test:$spring_boot_version")
-//    testCompile ("org.springframework.boot:spring-boot-starter-web:2.1.2.RELEASE")
-//    testCompile ("org.springframework.boot:spring-boot-starter-data-jpa:$spring_boot_version")
+//    compile "org.springframework.boot:spring-boot-starter-integration:$spring_boot_version"
     testCompile group: 'org.hamcrest', name: 'hamcrest-all', version: '1.3'
     compile "redis.clients:jedis:2.9.0"
-    compile "org.springframework.boot:spring-boot-starter-amqp:$spring_boot_version"
-
+    
     compile group: 'com.ibm.mq', name: 'mq-jms-spring-boot-starter', version: '2.0.1'
 //    compile group: 'org.springframework.integration', name: 'spring-integration-java-dsl', version: '1.0.0.RELEASE'
     compile group: 'org.springframework.integration', name: 'spring-integration-jms', version: '5.0.8.RELEASE'
@@ -43,25 +39,24 @@ dependencies {
 //    compile "org.springframework.data:spring-data-redis:2.0.3.RELEASE"
     compile "org.springframework.integration:spring-integration-amqp:5.0.8.RELEASE"
     compile 'org.jetbrains.kotlin:kotlin-reflect:1.2.61'
-//    compile 'com.fasterxml.jackson.module:jackson-module-kotlin:2.9.6'
-    compile 'com.fasterxml.jackson.core:jackson-databind'
     testCompile "org.jetbrains.kotlin:kotlin-test:$kotlin_version"
 
     testCompile("org.apache.qpid:qpid-broker:6.0.4")
     compileOnly('org.projectlombok:lombok:1.16.20')
-    compile group: 'org.springframework.boot', name: 'spring-boot-starter-activemq', version: '2.1.2.RELEASE'
+//    compile group: 'org.springframework.boot', name: 'spring-boot-starter-activemq', version: '2.1.2.RELEASE'
 
 //    compile group: 'org.eclipse.jetty', name: 'jetty-server', version: '9.4.12.v20180830'
 
 //    compile group: 'org.springframework.integration', name: 'spring-integration-java-dsl', version: '1.2.3.RELEASE'
     testCompile group: 'junit', name: 'junit', version: '4.12'
 
-    compile 'com.ibm.mq:mq-jms-spring-boot-starter:2.0.1'
+//    compile 'com.ibm.mq:mq-jms-spring-boot-starter:2.0.1'
 }
 
 compileKotlin {
     kotlinOptions.jvmTarget = "1.8"
 }
-compileTestKotlin {
-    kotlinOptions.jvmTarget = "1.8"
+
+bootRun {
+    mainClassName = 'GillApplication'
 }

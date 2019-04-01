@@ -12,7 +12,7 @@ import javax.jms.ConnectionFactory
 import javax.jms.JMSException
 
 @Configuration
-open class MQTestConfig{
+class MQTestConfig{
 
     @Autowired
     lateinit var connectionFactory: ConnectionFactory

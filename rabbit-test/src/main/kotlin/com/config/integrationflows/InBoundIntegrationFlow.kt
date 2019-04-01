@@ -70,8 +70,8 @@ open class InBoundIntegrationFlow{
     @Autowired
     lateinit var redisRepo: RedisRepo
 
-    @Autowired
-    private val jsonMessageConverter: Jackson2JsonMessageConverter ?= null
+//    @Autowired
+//    private val jsonMessageConverter: Jackson2JsonMessageConverter ?= null
 
     @Autowired
     val outBoundChannel: MessageChannel?= null
@@ -81,7 +81,7 @@ open class InBoundIntegrationFlow{
     @Bean
     open fun inComingPersonFlow(connectionFactory: ConnectionFactory): IntegrationFlow{
         return IntegrationFlows.from   (Amqp.inboundAdapter(connectionFactory, "gil.queue")  //Can add multiple queues here
-                                            .messageConverter(jsonMessageConverter)
+//                                            .messageConverter(jsonMessageConverter)
                                         ).aggregate {
                                                 a -> a.correlationStrategy {
                                                 b -> b.headers["person"]
