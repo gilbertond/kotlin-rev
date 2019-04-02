@@ -11,12 +11,8 @@ import javax.jms.TextMessage
 import org.slf4j.LoggerFactory
 import org.springframework.context.annotation.Configuration
 
-<<<<<<< HEAD
 @Component
 @Configuration
-=======
-@Component("customMessageConverter")
->>>>>>> fixed json config bugs in rabbit module
 class CustomMessageConverter: MessageConverter {
 
     private val mapper = ObjectMapper()

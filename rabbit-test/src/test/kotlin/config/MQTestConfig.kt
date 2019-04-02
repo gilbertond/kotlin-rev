@@ -1,6 +1,7 @@
 package config
 
 import com.config.MQConfig
+import org.apache.activemq.ActiveMQConnectionFactory
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
@@ -8,26 +9,30 @@ import org.springframework.integration.dsl.IntegrationFlow
 import org.springframework.integration.dsl.IntegrationFlows
 import org.springframework.integration.jms.dsl.Jms
 import org.springframework.jms.core.JmsTemplate
+import java.util.*
 import javax.jms.ConnectionFactory
 import javax.jms.JMSException
 
 @Configuration
 class MQTestConfig{
 
-    @Autowired
-    lateinit var connectionFactory: ConnectionFactory
+    val DEFAULT_BROKER_URL = "tcp://localhost:61616"
+    val COMMENT_QUEUE = "test-queue"
 
-    @Autowired
-    lateinit var jmsTemplate: JmsTemplate
+    @Bean
+    @Throws(NumberFormatException::class, JMSException::class)
+    fun connectionFactory(): ConnectionFactory {
+        val connectionFactory = ActiveMQConnectionFactory()
+        connectionFactory.brokerURL = DEFAULT_BROKER_URL
+        connectionFactory.trustedPackages = Arrays.asList("com")
+        return connectionFactory
+    }
 
-//    @Bean
-//    @Throws(NumberFormatException::class, JMSException::class)
-//    open fun outBoundFlow(): IntegrationFlow {
-//
-//        MQPropertiesTest.LOG.info("*********************\n Creating outBoundChannel to send messages\n *****************")
-//        return IntegrationFlows.from(Jms.outboundAdapter(jmsTemplate) )
-//                .extractRequestPayload(true)
-//                .destination("some-mq-queue")
-//        ).handle("messageHa", "execute").get()
-//    }
+    @Bean
+    fun jmsTemplate(): JmsTemplate {
+        val template = JmsTemplate()
+        template.connectionFactory = connectionFactory()
+        template.defaultDestinationName = COMMENT_QUEUE
+        return template
+    }
 }

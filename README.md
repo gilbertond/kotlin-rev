@@ -14,12 +14,14 @@ Disable /error page, can achieve that with any of 3 ways below
 
 ###CF deploy script
 `https://developer.ibm.com/answers/questions/193849/how-to-deploy-shell-script/`
-<<<<<<< HEAD
-`https://github.com/fe01134/djangobluemix`
-=======
-`https://github.com/fe01134/djangobluemix
+`https://github.com/fe01134/djangobluemix`   
 
 ###Spring integration [using activator, transform, endpoint etc]
 `https://dzone.com/articles/message-processing-spring`
 `https://github.com/ibm-messaging/mq-jms-spring`
->>>>>>> fixed json config bugs in rabbit module
+
+
+###fix gitignore not working
+`git rm -r --cached .`
+ `git add . `
+ `git commit -m ".gitignore is now working"`  `

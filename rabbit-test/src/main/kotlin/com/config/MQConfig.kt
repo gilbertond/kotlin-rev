@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.beans.factory.annotation.Qualifier
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
+import org.springframework.context.annotation.Profile
 import org.springframework.integration.channel.DirectChannel
 import org.springframework.integration.dsl.IntegrationFlow
 import org.springframework.integration.dsl.IntegrationFlows
@@ -44,8 +45,8 @@ class MQConfig {
     @Autowired
     lateinit var mqConfig: MQConfig
 
-    @Autowired
-    @Qualifier("customMessageConverter")
+//    @Autowired
+//    @Qualifier("customMessageConverter")
     private val messageConverter: MessageConverter = CustomMessageConverter()
 
     @Bean
@@ -99,6 +100,7 @@ class MQConfig {
         return MessageChannels.direct().get()
     }
 
+    @Profile("!test")
     @Bean
     @Throws(NumberFormatException::class, JMSException::class)
     fun jmsTemplate(): JmsTemplate {
@@ -109,6 +111,7 @@ class MQConfig {
         return template
     }
 
+    @Profile("!test")
     @Bean
     @Throws(NumberFormatException::class, JMSException::class)
     fun connectionFactory(): ConnectionFactory {

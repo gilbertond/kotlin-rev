@@ -11,3 +11,7 @@ build/
 *.class
 rabbit-test/build/
 .gradle/
+.gradle/**
+rabbit-test/activemq-data/localhost/KahaDB/db.redo
+rabbit-test/activemq-data/localhost/KahaDB/db.data
+rabbit-test/activemq-data/localhost/KahaDB/lock
