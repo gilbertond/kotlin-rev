@@ -35,3 +35,4 @@ LOGS: `docker logs gil-rabbit-name`
  `https://github.com/ibm-messaging/mq-docker`
  `https://www.ibm.com/developerworks/websphere/library/techarticles/1311_jin/1311_jin.html`
  `http://localhost:8080/wmq-monitoring/`
+ `https://github.com/rabbitmq/hop` for rabbit queue info access
