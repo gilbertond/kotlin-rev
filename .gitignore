@@ -1,6 +1,13 @@
 build/
 .idea
-*/build/
+*/build/git
 *.log
 *.log.*
 *.FDC
+**/build/
+*.log
+*.log.*
+*.FDC
+*.class
+rabbit-test/build/
+.gradle/

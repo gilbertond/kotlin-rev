@@ -14,8 +14,16 @@ import org.springframework.integration.config.EnableIntegration
 import org.springframework.messaging.MessageChannel
 import org.springframework.messaging.support.MessageBuilder
 import com.ibm.mq.constants.MQConstants
+<<<<<<< HEAD
 import com.ibm.mq.headers.pcf.PCFMessage
 import com.ibm.mq.headers.pcf.PCFMessageAgent
+=======
+//import com.ibm.mq.headers.pcf.PCFAgent
+import com.ibm.mq.pcf.PCFAgent
+import com.ibm.mq.headers.pcf.PCFMessage
+import com.ibm.mq.headers.pcf.PCFMessageAgent
+import java.lang.Exception
+>>>>>>> fixed json config bugs in rabbit module
 
 
 @SpringBootApplication
@@ -28,11 +36,19 @@ open class GillApplication : CommandLineRunner {
 
     @Autowired
     val outBoundChannel: MessageChannel? = null
+<<<<<<< HEAD
 
     @Autowired
     lateinit var mqOutBoundChannel: MessageChannel
 
     @Autowired
+=======
+
+    @Autowired
+    lateinit var mqOutBoundChannel: MessageChannel
+
+    @Autowired
+>>>>>>> fixed json config bugs in rabbit module
     lateinit var redisRepo: RedisRepo
 
     @Autowired
@@ -57,6 +73,7 @@ open class GillApplication : CommandLineRunner {
 //            outBoundChannel.send(MessageBuilder.withPayload(Person(423, "Daiel$count", "Ndamaje$count")).setHeader("person", "person$count").build())
 //
 ////            Thread.sleep(2000)
+<<<<<<< HEAD
         try {
             mqOutBoundChannel.send(MessageBuilder.withPayload(
                     Person(
@@ -68,6 +85,21 @@ open class GillApplication : CommandLineRunner {
         }catch (ex: Exception){
             ex.printStackTrace()
         }
+=======
+
+//        THIS IS FOR AMQ SENDING....
+//        try {
+//            mqOutBoundChannel.send(MessageBuilder.withPayload(
+//                    Person(
+//                            999,
+//                            "Am i there$count",
+//                            "let us see $count"
+//                    )).setHeader("person", "person$count").build()
+//            )
+//        }catch (ex: Exception){
+//            ex.printStackTrace()
+//        }
+>>>>>>> fixed json config bugs in rabbit module
 //        mqOutBoundChannel.send(
 //                MessageBuilder.withPayload(
 //                        Person(
@@ -98,10 +130,23 @@ open class GillApplication : CommandLineRunner {
 
 //        System.out.println("Redis: ${mapper.writerWithDefaultPrettyPrinter().writeValueAsString(redisRepo.findAll())}")
 
+<<<<<<< HEAD
 //        val agent = PCFMessageAgent("localhost", 1414, "SYSTEM.DEF.SVRCONN")
 //        val pcfCmd = PCFMessage(MQConstants.MQCMD_INQUIRE_CHANNEL)
 //        pcfCmd.addParameter(MQConstants.MQCACH_CHANNEL_NAME, "mqOutBoundChannel")
 //        val pcfResponse = agent.send(pcfCmd)
+=======
+        try {
+//            val agent = PCFAgent("localhost", 1414, "DEV.ADMIN.SVRCONN")
+////            MQCFH cfh = new MQCFH(agentNode.send(CMQCFC.MQCMD_INQUIRE_Q, {new MQCFST(CMQC.MQCA_Q_NAME, QUEUE_NAME)})[0]);
+
+//            val pcfCmd = PCFMessage(MQConstants.MQCMD_INQUIRE_CHANNEL)
+//            pcfCmd.addParameter(MQConstants.MQCACH_CHANNEL_NAME, "mqOutBoundChannel")
+//            val pcfResponse = agent.send(pcfCmd)
+        }catch (ex: Exception){
+            ex.printStackTrace()
+        }
+>>>>>>> fixed json config bugs in rabbit module
     }
 }
 

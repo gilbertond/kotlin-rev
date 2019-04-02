@@ -6,6 +6,7 @@ import com.ibm.mq.jms.MQQueueConnectionFactory
 import com.ibm.mq.spring.boot.MQConfigurationProperties
 import com.ibm.msg.client.wmq.WMQConstants
 import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.beans.factory.annotation.Qualifier
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import org.springframework.integration.channel.DirectChannel
@@ -44,7 +45,8 @@ class MQConfig {
     lateinit var mqConfig: MQConfig
 
     @Autowired
-    private val messageConverter: CustomMessageConverter ?= null
+    @Qualifier("customMessageConverter")
+    private val messageConverter: MessageConverter = CustomMessageConverter()
 
     @Bean
     fun mqOutBoundFlow(): IntegrationFlow {
