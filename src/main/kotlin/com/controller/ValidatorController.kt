@@ -15,7 +15,7 @@ import javax.validation.Valid
 @Scope(WebApplicationContext.SCOPE_REQUEST)
 class ValidatorController(@Autowired val registrationService: RegistrationService) {
 
-    @GetMapping(value = "")
+    @GetMapping(value = [""])
     fun doGet(model : Model) : String {
         model.addAttribute("user", User())
         return "index"

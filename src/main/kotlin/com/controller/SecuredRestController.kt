@@ -22,13 +22,13 @@ public class Hello1Controller {
         return "I am secured 1"
     }
 
-    @RequestMapping(value = "securedEndPoint2", method = [RequestMethod.GET, RequestMethod.GET])
+    @RequestMapping(value = ["securedEndPoint2"], method = [RequestMethod.GET, RequestMethod.GET])
     fun secured2(): String{
 
         return "I am secured 2"
     }
 
-    @RequestMapping(value = "securedEndPoint3", method = [RequestMethod.POST, RequestMethod.PUT])
+    @RequestMapping(value = ["securedEndPoint3"], method = [RequestMethod.POST, RequestMethod.PUT])
     fun secured3(): String{
 
         return "I am secured 3"

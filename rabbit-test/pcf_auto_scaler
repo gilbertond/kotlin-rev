@@ -41,7 +41,7 @@ Follow these steps to enable App Autoscaler for the app:
 1. Under **Processes and Instances**, enable **Autoscaling**. 
 <%= image_tag("scale-app.png", :alt => "In the 'Processes and Instances' section of the 'Overview' pane, find 'Autoscaling' two rows below the title of each process.") %>
 
-1. Click **Manage Autoscaling** to [configure](#config) instance limits, scaling rules, and scheduled limit changes for the app.
+1. Click **Manage Autoscaling** to [configure](#config) instance limits, scaling rules, and com.scheduled limit changes for the app.
 
       <%= image_tag('images/manage-autoscaling.png') %>
 
@@ -153,14 +153,14 @@ Because app demand often follows a weekly, daily, or hourly schedule, you can sc
 
 1. Click **EDIT** next to **SCHEDULED LIMITS**.
 
-1. Click **ADD NEW** to add a new scheduled limit or select an existing entry to modify by clicking **EDIT** next to the entry.
+1. Click **ADD NEW** to add a new com.scheduled limit or select an existing entry to modify by clicking **EDIT** next to the entry.
 
 1. Edit the following values:
 	* **Date** and **Time (local)**: Set the date and time of the change.
 	* **Repeat (Optional)**: Set the day of the week for which you want to repeat the change.
 	* **Min** and **Max**: Set the allowable range within which App Autoscaler can change the instance count for an app.
 
-	    <%= image_tag('images/scheduled-changes.png') %>
+	    <%= image_tag('images/com.scheduled-changes.png') %>
 
 1. Click **SAVE**.
 

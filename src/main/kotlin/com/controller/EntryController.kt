@@ -10,7 +10,7 @@ import java.util.*
 @RestController
 class EntryController{
 
-    @RequestMapping(value = "/unauthorized", method = [(RequestMethod.GET), (RequestMethod.POST), (RequestMethod.PUT), (RequestMethod.DELETE), (RequestMethod.PATCH)])
+    @RequestMapping(value = ["/unauthorized"], method = [(RequestMethod.GET), (RequestMethod.POST), (RequestMethod.PUT), (RequestMethod.DELETE), (RequestMethod.PATCH)])
     fun unauthorizedAccessMapping(): ResponseEntity<Any> {
         return ResponseEntity(ErrorMessage(401, "Unauthorised access"), HttpStatus.UNAUTHORIZED)
     }
