@@ -4,6 +4,7 @@ import com.ibm.mq.MQQueueManager
 import com.ibm.mq.MQC
 import com.ibm.mq.MQEnvironment
 import com.ibm.mq.MQException
+import com.ibm.mq.constants.MQConstants
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Component
 
@@ -16,6 +17,7 @@ class QueueManager{
     val manager: String? = null
     var qmgr: MQQueueManager? = null
 
+//    TODO register me as a bean for singleton purposes
     @Throws(MQException::class)
     private fun createQueueManager(): MQQueueManager {
         MQEnvironment.channel = connectionProperties.channel
@@ -36,11 +38,12 @@ class QueueManager{
 
         val queue = qmgr!!.accessQueue(
                 queueName,
-                MQC.MQOO_INQUIRE or MQC.MQOO_INPUT_AS_Q_DEF,
+                MQConstants.MQOO_INQUIRE or MQConstants.MQOO_INPUT_AS_Q_DEF,
                 connectionProperties.queueManager,
                 null,
                 null
         )
+//        queue.close() //Close the queue after otherwise multiple connections
         return queue.currentDepth
     }
 }
