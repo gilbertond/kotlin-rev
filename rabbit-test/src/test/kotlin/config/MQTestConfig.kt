@@ -1,10 +1,12 @@
 package config
 
 import com.config.MQConfig
+import com.ibm.mq.spring.boot.MQConfigurationProperties
 import org.apache.activemq.ActiveMQConnectionFactory
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
+import org.springframework.context.annotation.Profile
 import org.springframework.integration.dsl.IntegrationFlow
 import org.springframework.integration.dsl.IntegrationFlows
 import org.springframework.integration.jms.dsl.Jms
@@ -14,6 +16,7 @@ import javax.jms.ConnectionFactory
 import javax.jms.JMSException
 
 @Configuration
+@Profile("test")   
 class MQTestConfig{
 
     val DEFAULT_BROKER_URL = "tcp://localhost:61616"
@@ -36,3 +39,7 @@ class MQTestConfig{
         return template
     }
 }
+
+@Profile("test")
+@Configuration
+class IbmMqConnectionProperties: MQConfigurationProperties()

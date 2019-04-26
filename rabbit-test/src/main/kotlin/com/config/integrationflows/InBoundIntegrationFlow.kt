@@ -79,8 +79,8 @@ open class InBoundIntegrationFlow{
 
     //TODO play around with queue size for release strategy
     @Bean
-    open fun inComingPersonFlow(connectionFactory: ConnectionFactory): IntegrationFlow{
-        return IntegrationFlows.from   (Amqp.inboundAdapter(connectionFactory, "gil.queue")  //Can add multiple queues here
+    open fun inComingPersonFlow(rabbitConnectionFactory: ConnectionFactory): IntegrationFlow{
+        return IntegrationFlows.from   (Amqp.inboundAdapter(rabbitConnectionFactory, "gil.queue")  //Can add multiple queues here
 //                                            .messageConverter(jsonMessageConverter)
                                         ).aggregate {
                                                 a -> a.correlationStrategy {

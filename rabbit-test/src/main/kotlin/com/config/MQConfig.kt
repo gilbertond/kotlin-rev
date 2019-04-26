@@ -1,16 +1,12 @@
 package com.config
 
-import com.fasterxml.jackson.annotation.JsonInclude
 import com.ibm.mq.jms.MQQueue
 import com.ibm.mq.jms.MQQueueConnectionFactory
-import com.ibm.mq.spring.boot.MQConfigurationProperties
 import com.ibm.msg.client.wmq.WMQConstants
 import org.springframework.beans.factory.annotation.Autowired
-import org.springframework.beans.factory.annotation.Qualifier
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import org.springframework.context.annotation.Profile
-import org.springframework.integration.channel.DirectChannel
 import org.springframework.integration.dsl.IntegrationFlow
 import org.springframework.integration.dsl.IntegrationFlows
 //import org.springframework.integration.dsl.MessageChannels
@@ -18,13 +14,10 @@ import org.springframework.integration.dsl.Pollers
 import org.springframework.integration.dsl.channel.MessageChannels
 //import org.springframework.integration.dsl.channel.MessageChannels
 import org.springframework.integration.jms.dsl.Jms
-import org.springframework.jca.cci.connection.ConnectionSpecConnectionFactoryAdapter
-import org.springframework.jms.annotation.JmsListener
 import org.springframework.jms.connection.UserCredentialsConnectionFactoryAdapter
 import org.springframework.jms.core.JmsTemplate
 import org.springframework.jms.support.converter.MessageConverter
 import org.springframework.messaging.MessageChannel
-import java.util.concurrent.TimeUnit
 import java.util.logging.Logger
 import javax.jms.ConnectionFactory
 import javax.jms.Destination
@@ -37,7 +30,7 @@ class MQConfig {
     private val logger: Logger = Logger.getLogger(MQConfig::class.simpleName)
 
     @Autowired
-    private lateinit var connectionProperties: ConnectionProperties
+    private lateinit var ibmMqConnectionProperties: IbmMqConnectionProperties
 
     @Autowired
     lateinit var jmsTemplate: JmsTemplate
@@ -116,15 +109,15 @@ class MQConfig {
     @Throws(NumberFormatException::class, JMSException::class)
     fun connectionFactory(): ConnectionFactory {
         val mqQueueConnectionFactory = MQQueueConnectionFactory()
-        mqQueueConnectionFactory.hostName = connectionProperties.hostName
-//        mqQueueConnectionFactory.port = connectionProperties.port
-        mqQueueConnectionFactory.channel = connectionProperties.channel
-        mqQueueConnectionFactory.queueManager = connectionProperties.queueManager
+        mqQueueConnectionFactory.hostName = ibmMqConnectionProperties.hostName
+//        mqQueueConnectionFactory.port = ibmMqConnectionProperties.port
+        mqQueueConnectionFactory.channel = ibmMqConnectionProperties.channel
+        mqQueueConnectionFactory.queueManager = ibmMqConnectionProperties.queueManager
         mqQueueConnectionFactory.transportType = WMQConstants.WMQ_CM_CLIENT
 
         val userCredentialsConnectionFactoryAdapter = UserCredentialsConnectionFactoryAdapter()
-        userCredentialsConnectionFactoryAdapter.setUsername(connectionProperties.user)
-        userCredentialsConnectionFactoryAdapter.setPassword(connectionProperties.password)
+        userCredentialsConnectionFactoryAdapter.setUsername(ibmMqConnectionProperties.user)
+        userCredentialsConnectionFactoryAdapter.setPassword(ibmMqConnectionProperties.password)
         userCredentialsConnectionFactoryAdapter.setTargetConnectionFactory(mqQueueConnectionFactory)
 
         return userCredentialsConnectionFactoryAdapter

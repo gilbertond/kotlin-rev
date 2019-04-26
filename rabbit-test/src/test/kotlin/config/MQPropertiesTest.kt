@@ -1,9 +1,8 @@
 package config
 
-import com.config.ConnectionProperties
+import com.config.IbmMqConnectionProperties
 import com.config.MQConfig
 import com.ibm.mq.spring.boot.MQAutoConfiguration
-import com.ibm.mq.spring.boot.MQConfigurationProperties
 import org.hamcrest.MatcherAssert.assertThat
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -25,7 +24,7 @@ import org.hamcrest.CoreMatchers.`is` as Is
     MQAutoConfiguration::class,
     MQTestConfig::class,
     MQConfig::class,
-    ConnectionProperties::class,
+    IbmMqConnectionProperties::class,
     EmbeddedJmsBroker::class])
 @EnableAutoConfiguration
 @ActiveProfiles("test")
@@ -44,24 +43,24 @@ import org.hamcrest.CoreMatchers.`is` as Is
 class MQPropertiesTest {
 
     @Autowired
-    private lateinit var properties: MQConfigurationProperties
+    private lateinit var ibmMqConnectionProperties: IbmMqConnectionProperties
 
     @Autowired
     private lateinit var mqOutBoundChannel: MessageChannel
 
     @Test
     fun testConfigs() {
-        assertThat(properties.queueManager, Is("QMSET"))
-        assertThat(properties.channel, Is("CHANNELSET"))
-        assertThat(properties.connName, Is("localhost"))
-        assertThat(properties.user, Is("USER"))
-        assertThat(properties.password, Is("PASS"))
-        assertThat(properties.clientId, Is("mqm"))
-        assertThat(properties.isUseIBMCipherMappings, Is(true))
-        assertThat(properties.isUserAuthenticationMQCSP, Is(true))
+        assertThat(ibmMqConnectionProperties.queueManager, Is("QMSET"))
+        assertThat(ibmMqConnectionProperties.channel, Is("CHANNELSET"))
+        assertThat(ibmMqConnectionProperties.connName, Is("localhost"))
+        assertThat(ibmMqConnectionProperties.user, Is("USER"))
+        assertThat(ibmMqConnectionProperties.password, Is("PASS"))
+        assertThat(ibmMqConnectionProperties.clientId, Is("mqm"))
+        assertThat(ibmMqConnectionProperties.isUseIBMCipherMappings, Is(true))
+        assertThat(ibmMqConnectionProperties.isUserAuthenticationMQCSP, Is(true))
         assertThat(System.getProperty("com.ibm.mq.cfg.useIBMCipherMappings"), Is("true"))
-        assertThat(properties.sslCipherSuite, Is("CIPHER_SUITE"))
-        assertThat(properties.sslCipherSpec, Is("CIPHER_SPEC"))
+        assertThat(ibmMqConnectionProperties.sslCipherSuite, Is("CIPHER_SUITE"))
+        assertThat(ibmMqConnectionProperties.sslCipherSpec, Is("CIPHER_SPEC"))
     }
 
     @Test

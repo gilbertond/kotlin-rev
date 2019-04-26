@@ -32,9 +32,16 @@
         "AMQP_0_9_1"
       ]
     }],
-  "virtualhostnodes" : [ {
+  "queues": [
+    {
+      "name": "gil.other.queue",
+      "durable": false,
+      "attributes": {}
+    }
+  ],
+    "virtualhostnodes" : [ {
     "name" : "default",
     "type" : "JSON",
     "virtualHostInitialConfiguration" : "{ \"type\" : \"Memory\" }"
   } ]
-}
+} 

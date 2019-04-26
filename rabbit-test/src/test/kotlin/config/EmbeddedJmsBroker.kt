@@ -5,8 +5,8 @@ import com.ibm.mq.jms.MQQueueConnectionFactory
 import com.ibm.msg.client.wmq.WMQConstants
 import org.apache.activemq.broker.BrokerService
 import org.apache.activemq.broker.TransportConnector
-import org.apache.qpid.server.Broker
-import org.apache.qpid.server.BrokerOptions
+//import org.apache.qpid.server.Broker
+//import org.apache.qpid.server.BrokerOptions
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import org.springframework.jms.annotation.EnableJms

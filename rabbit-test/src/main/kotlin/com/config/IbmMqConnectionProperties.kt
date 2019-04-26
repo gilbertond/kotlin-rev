@@ -1,13 +1,16 @@
 package com.config
 
+import com.ibm.mq.spring.boot.MQConfigurationProperties
 import org.springframework.boot.context.properties.ConfigurationProperties
 import org.springframework.context.annotation.Configuration
+import org.springframework.context.annotation.Profile
 
 @Configuration
+//@Profile("!test")
 @ConfigurationProperties(
         prefix = "ibm.mq"
 )
-open class ConnectionProperties {
+open class IbmMqConnectionProperties: MQConfigurationProperties() {
     /**
      * Gets the host name.
      *
@@ -42,7 +45,7 @@ open class ConnectionProperties {
      *
      * @param channel Channel Name.
      */
-    var channel: String? = null
+//    var channel: String? = null
 
     /**
      * Gets the queue manager.
@@ -54,7 +57,7 @@ open class ConnectionProperties {
      *
      * @param queueManager Queue Manager Name.
      */
-    var queueManager: String? = null
+//    var queueManager: String? = null
 
     /**
      * Gets the target queue.
@@ -66,7 +69,7 @@ open class ConnectionProperties {
      *
      * @param targetQueue Target Queue Name.
      */
-    var targetQueue: String? = null
+//    var targetQueue: String? = null
 
     /**
      * Gets the file path.
@@ -78,10 +81,10 @@ open class ConnectionProperties {
      *
      * @param file file path.
      */
-    var file: String? = null
-    
-    var user: String? = null
+//    var file: String? = null
 
-    var password: String? = null
+//    var user: String? = null
+
+//    var password: String? = null
 
 }

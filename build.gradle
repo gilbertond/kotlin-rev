@@ -49,11 +49,20 @@ allprojects {        //Applies dependencies and configs to submodules
             exclude module: "jackson-core"
             exclude module: "jackson-annotations"
         }
-        compile("org.springframework.boot:spring-boot-starter-web:$spring_boot_version")
+        compile("org.springframework.boot:spring-boot-starter-web:$spring_boot_version")  {
+            exclude module: ("logback-core")
+            exclude module: ("logback-classic")
+            exclude module: "spring-boot-starter-logging"
+        }
         compile ('com.fasterxml.jackson.core:jackson-core:2.7.4')
         compile ('com.fasterxml.jackson.core:jackson-annotations:2.7.4')
 
         compileOnly('org.projectlombok:lombok:1.16.20')
+    }.each { dep ->
+        compile(dep) {
+//            exclude module: "spring-boot-starter-logging"
+            exclude module: "logback-classic"
+        }
     }
 }
 
@@ -61,6 +70,9 @@ dependencies {
     compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version" // Required for Kotlin integration
     compile("org.springframework.boot:spring-boot-starter-web:$spring_boot_version") {
         exclude module: "spring-boot-starter-json"
+        exclude module: ("logback-core")
+        exclude module: ("logback-classic")
+//        exclude module: "spring-boot-starter-logging"
     }
 
     compile ('io.jsonwebtoken:jjwt:0.7.0') {

@@ -1,74 +1,94 @@
 package com.integrationFlows
 
 import com.GillApplication
+import com.config.RabbitBrokerConnectionProperties
+import com.config.RabbitConfig
 import com.domain.Person
+import com.rabbitmq.client.ConnectionFactory
+import config.EmbeddedAMQPBroker
+//import config.EmbeddedBroker
+import config.MQTestConfig
 import org.hamcrest.MatcherAssert.assertThat
 import org.junit.After
 import org.junit.Before
-import org.junit.Ignore
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.springframework.amqp.rabbit.core.RabbitAdmin
+import org.springframework.amqp.rabbit.core.RabbitTemplate
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.context.SpringBootTest
+import org.springframework.integration.channel.DirectChannel
 import org.springframework.messaging.MessageChannel
 import org.springframework.messaging.support.MessageBuilder
 import org.springframework.test.context.ActiveProfiles
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner
 import javax.annotation.Resource
 import org.hamcrest.CoreMatchers.`is` as Is
+import org.junit.ClassRule
+import org.junit.AfterClass
+import org.junit.BeforeClass
+import org.apache.activemq.broker.BrokerService
 
 
-@Ignore
-@ActiveProfiles("integration", "local")
+@ActiveProfiles("test")
 @RunWith(SpringJUnit4ClassRunner::class)
-@SpringBootTest (classes = [GillApplication::class])
-class OutBoundIntegrationFlowTest{
+@SpringBootTest(classes = [
+    GillApplication::class,
+    MQTestConfig::class,
+    EmbeddedAMQPBroker::class,
+    RabbitConfig::class,
+    RabbitBrokerConnectionProperties::class
+])
+class OutBoundIntegrationFlowTest {
+
+    var embeddedBroker: EmbeddedAMQPBroker? = null
 
     @Autowired
     lateinit var outBoundChannel: MessageChannel
 
-    @Resource
-    private val admin: RabbitAdmin? = null
+//    @Resource
+//    private val rabbitAdmin: RabbitAdmin? = null
+
+    lateinit var rabbitAdmin: RabbitAdmin
+
+    @Autowired
+    lateinit var rabbitTemplate: RabbitTemplate
 
     @Before
     fun setUp(){
-        purgerQueue("gil.other.queue")
+        rabbitAdmin = RabbitAdmin(rabbitTemplate)
 
-        System.out.println("SETUP....." + getQueueCount("gil.other.queue"))
+        purgerQueue("gil.queue")
 
-        assertThat(getQueueCount("gil.other.queue"), Is(0))
+        System.out.println("SETUP....." + getQueueCount("gil.queue"))
+
+        assertThat(getQueueCount("gil.queue"), Is(0))
 
     }
 
     @After
-    fun close(){
-        purgerQueue("gil.other.queue")
+    fun close() {
+        purgerQueue("gil.queue")
     }
 
     @Test
-    fun `test sending messages`(){
+    fun `test sending messages`() {
         outBoundChannel!!.send(MessageBuilder.withPayload(Person(12, "Gilbert", "Ndenzi")).build())
-        admin!!.purgeQueue("gil.other.queue", true)
-     }
-
-    @Test
-    fun `test received messages are the same sent`(){
-
+        rabbitAdmin!!.purgeQueue("gil.queue", true)
     }
 
     @Test
-    fun `return true if a message in the queue is purged or deleted returns true if messages count is 0`(){
+    fun `return true if a message in the queue is purged or deleted returns true if messages count is 0`() {
         outBoundChannel!!.send(MessageBuilder.withPayload(Person(12, "Gilbert", "Ndenzi")).build())
         outBoundChannel.send(MessageBuilder.withPayload(Person(12, "Gilbert", "Ndenzi")).build())
         outBoundChannel.send(MessageBuilder.withPayload(Person(12, "Gilbert", "Ndenzi")).build())
 
-        purgerQueue("gil.other.queue")
-        assertThat(getQueueCount( "gil.other.queue"), Is(0))
+        purgerQueue("gil.queue")
+        assertThat(getQueueCount("gil.queue"), Is(0))
     }
 
     @Test
-    fun `returns true if count number of message in a queue on rabbitMQ is 3`(){
+    fun `returns true if count number of message in a queue on rabbitMQ is 3`() {
 
         outBoundChannel!!.send(MessageBuilder.withPayload(Person(12, "Gilbert", "Ndenzi")).build())
         outBoundChannel.send(MessageBuilder.withPayload(Person(12, "Gilbert", "Ndenzi")).build())
@@ -78,42 +98,40 @@ class OutBoundIntegrationFlowTest{
 
         Thread.sleep(3000)
 
-        assertThat(getQueueCount("gil.other.queue"), Is(3))
+        assertThat(getQueueCount("gil.queue"), Is(3))
 
     }
-    
+
     private fun getQueueCount(name: String): Int {
-        val declareOk = (admin ?: throw NullPointerException("Expression 'admin' must not be null"))
-                                            .rabbitTemplate
-                                            .execute {
-                                                channel -> channel.queueDeclarePassive(name)
-                                            }
+        val declareOk = (rabbitAdmin ?: throw NullPointerException("Expression 'rabbitAdmin' must not be null"))
+                .rabbitTemplate
+                .execute { channel ->
+                    channel.queueDeclarePassive(name)
+                }
         return declareOk.messageCount
     }
 
     private fun purgerQueue(name: String): Int {
-//        val declareOk = (admin ?: throw NullPointerException("Expression 'admin' must not be null"))
-//                                            .rabbitTemplate
-//                                            .execute {
-//                                                channel -> channel.queuePurge(name)                                            }
-//        return declareOk.messageCount
+        val declareOk = (rabbitAdmin ?: throw NullPointerException("Expression 'rabbitAdmin' must not be null"))
+                                            .rabbitTemplate
+                                            .execute {
+                                                channel -> channel.queuePurge(name)                                            }
+        return declareOk.messageCount
 
-        return 1
+//        return 1
     }
 
     private fun getQueueConsumers(name: String): Long {
-        val declareOk = (admin ?: throw NullPointerException("Expression 'admin' must not be null"))
+        val declareOk = (rabbitAdmin ?: throw NullPointerException("Expression 'rabbitAdmin' must not be null"))
                 .rabbitTemplate
-                .execute {
-                    channel -> channel.consumerCount(name)                                           }
+                .execute { channel -> channel.consumerCount(name) }
         return declareOk
     }
 
     private fun getQueueConsumersx(name: String): Long {
-        val declareOk = (admin ?: throw NullPointerException("Expression 'admin' must not be null"))
+        val declareOk = (rabbitAdmin ?: throw NullPointerException("Expression 'rabbitAdmin' must not be null"))
                 .rabbitTemplate
-                .execute {
-                    channel -> channel.nextPublishSeqNo                                          }
+                .execute { channel -> channel.nextPublishSeqNo }
         return declareOk.plus(10)
     }
 }

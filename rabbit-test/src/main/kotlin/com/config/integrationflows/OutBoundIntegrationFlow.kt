@@ -21,14 +21,14 @@ open class OutBoundIntegrationFlow{
     private val rabbitConfig: RabbitConfig ?= null
 
      @Autowired
-      private val connectionFactory: ConnectionFactory?= null
+      private val rabbitConnectionFactory: ConnectionFactory?= null
 
     @Bean
     open fun outBoundFlow(): IntegrationFlow{
         logger.info("*********************\n Creating outBoundChannel to send messages\n *****************")
         return IntegrationFlows .from("outBoundChannel") // or "outBoundChannel" call by name
                 .handle(
-                        Amqp.outboundAdapter(rabbitConfig!!.rabbitTemplate(connectionFactory = connectionFactory!!))
+                        Amqp.outboundAdapter(rabbitConfig!!.rabbitTemplate(rabbitConnectionFactory = rabbitConnectionFactory!!))
 //                                            .exchangeName("amq.direct") //create exchange
                                 .routingKey("gil.queue")//create queue
                 )

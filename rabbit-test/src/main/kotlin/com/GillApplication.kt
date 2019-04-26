@@ -29,111 +29,37 @@ open class GillApplication : CommandLineRunner {
     @Autowired
     val rabbitConfig: RabbitConfig? = null
 
-    @Autowired
-    lateinit var outBoundChannel: MessageChannel
-
-    @Autowired
-    lateinit var mqOutBoundChannel: MessageChannel
+//    @Autowired
+//    lateinit var outBoundChannel: MessageChannel
+//
+//    @Autowired
+//    lateinit var mqOutBoundChannel: MessageChannel
 
     @Autowired
     lateinit var redisRepo: RedisRepo
 
     @Autowired
     lateinit var mapper: ObjectMapper
-
-    @Autowired
-    lateinit var queueManager: QueueManager
-
+    
     //Send a message after startup
     override fun run(vararg args: String?) {
-
-        var count = 0
-//        while (count < 2) { count++
-//        ---------Send message to rabbit --------
-        outBoundChannel.send(MessageBuilder.withPayload(Person(12, "Gilbertxx$count", "Ndenzi$count")).setHeader("person", "person$count").build())
-        outBoundChannel.send(MessageBuilder.withPayload(Person(34, "Albertxx$count", "Gabiro$count")).setHeader("person", "person$count").build())
-        outBoundChannel.send(MessageBuilder.withPayload(Person(92, "Godwin$count", "Mugabe$count")).setHeader("person", "person$count").build())
-        outBoundChannel.send(MessageBuilder.withPayload(Person(323, "Kabera$count", "Dunstan$count")).setHeader("person", "person$count").build())
-        outBoundChannel.send(MessageBuilder.withPayload(Person(22, "Karen$count", "Uwera$count")).setHeader("person", "person$count").build())
-
-//            Thread.sleep(2000)
-        outBoundChannel.send(MessageBuilder.withPayload(Person(82, "Bonita$count", "Abera$count")).setHeader("person", "person$count").build())
-        outBoundChannel.send(MessageBuilder.withPayload(Person(353, "Renita$count", "Ingabire$count")).setHeader("person", "person$count").build())
-        outBoundChannel.send(MessageBuilder.withPayload(Person(353, "Renita$count", "Ingabire$count")).setHeader("person", "person$count").build())
-        outBoundChannel.send(MessageBuilder.withPayload(Person(423, "Daiel$count", "Ndamaje$count")).setHeader("person", "person$count").build())
-        outBoundChannel.send(MessageBuilder.withPayload(Person(423, "Daiel$count", "Ndamaje$count")).setHeader("person", "person$count").build())
-
-//            Thread.sleep(2000)
-
-        // -------Rabbit Queue depth ------------
-        try {
-            val c = Client("http://127.0.0.1:8585/api/", "gilberto", "gil")
-
-//           get overview
-            c.overview
-
-//          list cluster nodes
-            c.nodes
 //
-// get status and metrics of individual node
-            c.getNode("rabbit@mercurio.local")
+//        var count = 0
+////        while (count < 2) { count++
+////        ---------Send message to rabbit --------
+//        outBoundChannel.send(MessageBuilder.withPayload(Person(12, "Gilbertxx$count", "Ndenzi$count")).setHeader("person", "person$count").build())
+//        outBoundChannel.send(MessageBuilder.withPayload(Person(34, "Albertxx$count", "Gabiro$count")).setHeader("person", "person$count").build())
+//        outBoundChannel.send(MessageBuilder.withPayload(Person(92, "Godwin$count", "Mugabe$count")).setHeader("person", "person$count").build())
+//        outBoundChannel.send(MessageBuilder.withPayload(Person(323, "Kabera$count", "Dunstan$count")).setHeader("person", "person$count").build())
+//        outBoundChannel.send(MessageBuilder.withPayload(Person(22, "Karen$count", "Uwera$count")).setHeader("person", "person$count").build())
+//
+////            Thread.sleep(2000)
+//        outBoundChannel.send(MessageBuilder.withPayload(Person(82, "Bonita$count", "Abera$count")).setHeader("person", "person$count").build())
+//        outBoundChannel.send(MessageBuilder.withPayload(Person(353, "Renita$count", "Ingabire$count")).setHeader("person", "person$count").build())
+//        outBoundChannel.send(MessageBuilder.withPayload(Person(353, "Renita$count", "Ingabire$count")).setHeader("person", "person$count").build())
+//        outBoundChannel.send(MessageBuilder.withPayload(Person(423, "Daiel$count", "Ndamaje$count")).setHeader("person", "person$count").build())
+//        outBoundChannel.send(MessageBuilder.withPayload(Person(423, "Daiel$count", "Ndamaje$count")).setHeader("person", "person$count").build())
 
-//             list client connections
-            c.connections
-
-            // list all queues
-            c.queues
-
-
-
-        } catch (ex: Exception) {
-            ex.printStackTrace()
-        }
-
-        /* --------- Send message to WMQ ---------
-        mqOutBoundChannel.send(MessageBuilder.withPayload(
-                Person(
-                        999,
-                        "Am i there$count",
-                        "let us see $count"
-                )).setHeader("person", "person$count").build()
-        )
-        mqOutBoundChannel.send(
-                MessageBuilder.withPayload(
-                        Person(
-                                999,
-                                "Am i there$count",
-                                "let us see $count"
-                        )).setHeader("person", "person$count").build()
-        )
-        mqOutBoundChannel.send(
-                MessageBuilder.withPayload(
-                        Person(999, "Am i there$count", "let us see $count")).setHeader("person", "person$count").build()
-        )
-        mqOutBoundChannel.send(
-                MessageBuilder.withPayload(
-                        Person(999, "Am i there$count", "let us see $count")).setHeader("person", "person$count").build()
-        )
-        mqOutBoundChannel!!.send(
-                MessageBuilder.withPayload(
-                        Person(
-                                999,
-                                "Am i there$count",
-                                "let us see $count"
-                        )).setHeader("person", "person$count").build()
-        )
-        */
-
-        /* ----------- WMQ Queue depth -----------
-                  try {
-                      println(
-                          "Depth: ${queueManager.depthOf("DEV.QUEUE.3") }"
-                      )
-                  }catch (ex:Exception){
-                      ex.printStackTrace()
-                  }
-                  */
-//        }
 
 //        System.out.println("Redis: ${mapper.writerWithDefaultPrettyPrinter().writeValueAsString(redisRepo.findAll())}")
 

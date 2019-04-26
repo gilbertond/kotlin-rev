@@ -1,8 +1,8 @@
 package integration
 
 import com.google.common.io.Files
-import org.apache.qpid.server.Broker
-import org.apache.qpid.server.BrokerOptions
+//import org.apache.qpid.server.Broker
+//import org.apache.qpid.server.BrokerOptions
 import org.junit.ClassRule
 import org.junit.rules.ExternalResource
 import org.junit.runner.RunWith
@@ -20,15 +20,7 @@ import java.util.*
 //@RunWith(SpringRunner::class)
 //@SpringBootTest
 class ApplicationIntegrationTest{
-    @Value("\${spring.rabbitmq.port}")
-    private val rabbitmqPort: String? = null
 
-
-    val QPID_CONFIG_LOCATION = "src/test/resources/qpid-config.json"
-    val APPLICATION_CONFIG_LOCATION = "src/test/resources/application.properties"
-
-    @MockBean
-    private val runner: Runner? = null
 
 //    @Autowired
 //    private val rabbitTemplate: RabbitTemplate? = null
@@ -40,33 +32,7 @@ class ApplicationIntegrationTest{
 //    private val secondReceiver: SecondReceiver? = null
 
     //TODO Extract external util class (Start(Stop Rabbitmq )
-//    @ClassRule
-    open val resource: ExternalResource = object : ExternalResource() {
-        private val broker = Broker()
 
-        @Throws(Throwable::class)
-        override fun before() {
-            val properties = Properties()
-            properties.load(FileInputStream(File(APPLICATION_CONFIG_LOCATION)))
-            val amqpPort = properties.getProperty("spring.rabbitmq.port")
-            val tmpFolder = Files.createTempDir()
-            val userDir = System.getProperty("user.dir").toString()
-            val file = File(userDir)
-            val homePath = file.getAbsolutePath()
-            val brokerOptions = BrokerOptions()
-            brokerOptions.setConfigProperty("qpid.work_dir", tmpFolder.getAbsolutePath())
-            brokerOptions.setConfigProperty("qpid.amqp_port", amqpPort)
-            brokerOptions.setConfigProperty("qpid.home_dir", homePath)
-            brokerOptions.initialConfigurationLocation = homePath + "/" + QPID_CONFIG_LOCATION
-            broker.startup(brokerOptions)
-        }
-
-
-        override fun after() {
-            broker.shutdown()
-        }
-
-    }
 
 
 //    @Test
